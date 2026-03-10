@@ -30,7 +30,7 @@
       background-color: var(--navy);
       position: relative;
       overflow: hidden;
-      padding: 64px 24px 72px;
+      padding: 0 48px;
     }
 
     .hero-header::before {
@@ -38,25 +38,40 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at 15% 70%, rgba(91,126,196,0.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 10% 80%, rgba(91,126,196,0.4) 0%, transparent 50%),
         radial-gradient(ellipse at 90% 10%, rgba(46,74,128,0.6) 0%, transparent 50%);
       pointer-events: none;
     }
 
     .hero-inner {
-      max-width: 640px;
+      max-width: 1000px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      min-height: 340px;
+    }
+
+    .hero-logo-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 0;
     }
 
     .hero-header img {
-      height: 60px;
-      width: auto;
+      width: 100%;
+      max-width: 280px;
+      height: auto;
       display: block;
-      margin-bottom: 36px;
-      
       opacity: 0.95;
+    }
+
+    .hero-text-col {
+      padding: 56px 0;
     }
 
     .eyebrow {
@@ -71,25 +86,25 @@
 
     .hero-header h1 {
       font-family: 'Ubuntu', sans-serif;
-      font-weight: var(--w-light);
-      font-size: clamp(2.6rem, 6vw, 3.8rem);
-      line-height: var(--leading-tight);
-      letter-spacing: var(--tracking-tight);
+      font-weight: 700;
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
       color: var(--white);
       margin-bottom: 0;
     }
 
     .hero-header h1 em {
       font-style: italic;
+      font-weight: 300;
       color: var(--sky);
     }
 
     .subtitle {
-      margin-top: 16px;
-      font-size: var(--text-sm);
+      margin-top: 18px;
+      font-size: var(--text-base);
       color: rgba(255,255,255,0.55);
       line-height: var(--leading-normal);
-      max-width: 400px;
     }
 
     /* ── ACCENT BAR ── */
@@ -99,6 +114,19 @@
       height: 2px;
       background: var(--sky);
       margin-bottom: 20px;
+    }
+
+    /* ── RESPONSIVE HERO ── */
+    @media (max-width: 640px) {
+      .hero-header { padding: 40px 24px; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 0;
+        min-height: unset;
+      }
+      .hero-logo-col { padding: 40px 0 24px; justify-content: flex-start; }
+      .hero-header img { max-width: 120px; }
+      .hero-text-col { padding: 0 0 48px; }
     }
 
     /* ── MAIN CONTENT ── */
@@ -392,11 +420,15 @@
 <!-- ── HERO HEADER ── -->
 <div class="hero-header">
   <div class="hero-inner">
-    <img src="https://storage.googleapis.com/tijeweb/lucky_charm/images/logo_white_512px.png" alt="AVHH · MTL" />
-    <span class="accent-line"></span>
-    <p class="eyebrow">Una colección</p>
-    <h1>Cosas que hice<br><em>para ti</em></h1>
-    <p class="subtitle">Cada página es un momento. Entra cuando quieras.</p>
+    <div class="hero-logo-col">
+      <img src="https://storage.googleapis.com/tijeweb/lucky_charm/images/logo_white_512px.png" alt="AVHH · MTL" />
+    </div>
+    <div class="hero-text-col">
+      <span class="accent-line"></span>
+      <p class="eyebrow">Una colección</p>
+      <h1>Cosas que hice<br><em>para ti</em></h1>
+      <p class="subtitle">Cada página es un momento. Entra cuando quieras.</p>
+    </div>
   </div>
 </div>
 
