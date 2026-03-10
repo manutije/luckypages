@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lucky Pages</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf9f7;
+      --ink: #1a1a18;
+      --muted: #9a9890;
+      --accent: #c9a96e;
+      --line: #e8e5df;
+      --card-hover: #f2efe9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      padding: 0 24px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 80px 0 56px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 400px;
+    }
+
+    /* ── FILTER BAR ── */
+    .controls {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 28px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .count {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-wrap svg {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    input[type="search"] {
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 7px 12px 7px 32px;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--ink);
+      outline: none;
+      width: 180px;
+      transition: border-color 0.2s, width 0.3s;
+    }
+
+    input[type="search"]:focus {
+      border-color: var(--accent);
+      width: 220px;
+    }
+
+    input[type="search"]::placeholder { color: var(--muted); }
+
+    /* ── GRID ── */
+    .grid {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 20px 0 100px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px 24px;
+      align-items: start;
+      transition: background 0.15s;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .card:first-child { border-top: 1px solid var(--line); }
+
+    .card:hover { background: var(--card-hover); padding-left: 16px; padding-right: 16px; margin: 0 -16px; }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      transition: color 0.15s;
+    }
+
+    .card:hover .card-title { color: var(--accent); }
+
+    .card-desc {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      grid-column: 1;
+    }
+
+    .card-date {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) translateX(-4px);
+      opacity: 0;
+      color: var(--accent);
+      transition: opacity 0.15s, transform 0.2s;
+      font-size: 18px;
+    }
+
+    .card:hover .card-arrow {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      display: none;
+      text-align: center;
+      padding: 60px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 0 48px;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    /* ── FADE IN ── */
+    .card {
+      animation: fadeUp 0.4s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card:nth-child(1)  { animation-delay: 0.05s; }
+    .card:nth-child(2)  { animation-delay: 0.10s; }
+    .card:nth-child(3)  { animation-delay: 0.15s; }
+    .card:nth-child(4)  { animation-delay: 0.20s; }
+    .card:nth-child(5)  { animation-delay: 0.25s; }
+    .card:nth-child(6)  { animation-delay: 0.30s; }
+    .card:nth-child(7)  { animation-delay: 0.35s; }
+    .card:nth-child(8)  { animation-delay: 0.40s; }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Una colección</p>
+  <h1>Cosas que hice<br><em>para ti</em></h1>
+  <p class="subtitle">Cada página es un momento. Entra cuando quieras.</p>
+</header>
+
+<div class="controls">
+  <span class="count" id="count"></span>
+  <div class="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="search" id="search" placeholder="Buscar…" autocomplete="off"/>
+  </div>
+</div>
+
+<div class="grid" id="grid">
+  <!-- ═══════════════════════════════════════════
+       AGREGA O EDITA TUS PÁGINAS AQUÍ ABAJO
+       Copia un bloque <a class="card"> y pega uno nuevo.
+       Cambia: href, card-title, card-desc, card-date
+  ════════════════════════════════════════════ -->
+
+  <a class="card" href="https://storage.googleapis.com/tijeweb/lucky_charm/museos/index.html" target="_blank">
+    <div>
+      <div class="card-title">Domingo con Ana Vic</div>
+      <div class="card-desc">La página para planear nuestro domingo en Chapultepec.</div>
+    </div>
+    <div class="card-date">Nov 2025</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card" href="https://storage.googleapis.com/tijeweb/lucky_charm/probabilidades/index.html" target="_blank">
+    <div>
+      <div class="card-title">La probabilidad de nosotros</div>
+      <div class="card-desc">Cual es la probabilidad de que hayamos coincidido.</div>
+    </div>
+    <div class="card-date">Nov 2025</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card" href="https://fa.lcwebs.com" target="_blank">
+    <div>
+      <div class="card-title">First Aid</div>
+      <div class="card-desc">Aplicación de primeros auxilios para cuando necesitas una distracción.</div>
+    </div>
+    <div class="card-date">Dic 2025</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card" href="https://storage.googleapis.com/tijeweb/lucky_charm/girlfriend/pptx.html" target="_blank">
+    <div>
+      <div class="card-title">Propuesta #1</div>
+      <div class="card-desc">La página con la cual te pedí que fueras mi novia.</div>
+    </div>
+    <div class="card-date">Dic 2025</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card" href="https://storage.googleapis.com/tijeweb/lucky_charm/girlfriend/hacker.html" target="_blank">
+    <div>
+      <div class="card-title">Propuesta #2</div>
+      <div class="card-desc">La opción B con la cual te pediría que fueras mi novia.</div>
+    </div>
+    <div class="card-date">Dic 2025</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card" href="https://bet.lcwebs.com" target="_blank">
+    <div>
+      <div class="card-title">Lucky Bets</div>
+      <div class="card-desc">Página para hacer más divertido el super bowl y hacer apuestas.</div>
+    </div>
+    <div class="card-date">Ene 2026</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card" href="https://storage.googleapis.com/tijeweb/lucky_charm/SanValentin2026/index.html" target="_blank">
+    <div>
+      <div class="card-title">San Valentin</div>
+      <div class="card-desc">Página con una carta de San Valentin 2026.</div>
+    </div>
+    <div class="card-date">Feb 2026</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card" href="https://storage.googleapis.com/tijeweb/lucky_charm/Entrevista/goodluck.html" target="_blank">
+    <div>
+      <div class="card-title">Entrevista</div>
+      <div class="card-desc">Página de buena suerte en la entrevista.</div>
+    </div>
+    <div class="card-date">Mar 2026</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <!-- FIN DE TARJETAS — añade más arriba de esta línea -->
+
+  <div class="empty" id="empty">No encontré nada con ese nombre.</div>
+</div>
+
+<footer>hecho con amor ♡</footer>
+
+<script>
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const countEl = document.getElementById('count');
+  const searchEl = document.getElementById('search');
+  const emptyEl  = document.getElementById('empty');
+
+  function updateCount(n) {
+    countEl.textContent = n === cards.length
+      ? `${n} página${n !== 1 ? 's' : ''}`
+      : `${n} de ${cards.length}`;
+  }
+
+  updateCount(cards.length);
+
+  searchEl.addEventListener('input', () => {
+    const q = searchEl.value.toLowerCase().trim();
+    let visible = 0;
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      const show = text.includes(q);
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    emptyEl.style.display = visible === 0 ? 'block' : 'none';
+    updateCount(visible);
+  });
+</script>
+
+</body>
+</html>
