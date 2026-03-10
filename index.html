@@ -5,33 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lucky Pages</title>
 
-  <!-- Brand Kit Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-
-  <!-- Brand Kit CSS -->
   <link rel="stylesheet" href="https://storage.googleapis.com/tijeweb/lucky_charm/brandkit/brand-kit.css">
 
   <style>
-    /* ── PAGE OVERRIDES ── */
+    /* ── BASE ── */
     body {
-      padding: 0 24px;
+      background-color: #0F1929;
+      color: var(--off-white);
+      padding: 0;
+      margin: 0;
     }
 
-    /* ── HEADER ── */
-    header {
+    /* ── HERO HEADER ── */
+    .hero-header {
+      background-color: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 64px 24px 72px;
+    }
+
+    .hero-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 70%, rgba(91,126,196,0.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 10%, rgba(46,74,128,0.6) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
       max-width: 640px;
       margin: 0 auto;
-      padding: 72px 0 52px;
-      border-bottom: 1px solid var(--color-border);
+      position: relative;
+      z-index: 1;
     }
 
-    header img {
-      height: 64px;
+    .hero-header img {
+      height: 60px;
       width: auto;
-      margin-bottom: 32px;
       display: block;
+      margin-bottom: 36px;
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
     }
 
     .eyebrow {
@@ -41,45 +60,60 @@
       letter-spacing: var(--tracking-widest);
       text-transform: uppercase;
       color: var(--sky);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
-    header h1 {
+    .hero-header h1 {
       font-family: var(--font-display);
       font-weight: var(--w-light);
-      font-size: clamp(2.4rem, 6vw, 3.4rem);
+      font-size: clamp(2.6rem, 6vw, 3.8rem);
       line-height: var(--leading-tight);
       letter-spacing: var(--tracking-tight);
-      color: var(--navy);
+      color: var(--white);
+      margin-bottom: 0;
     }
 
-    header h1 em {
+    .hero-header h1 em {
       font-style: italic;
       color: var(--sky);
     }
 
     .subtitle {
-      margin-top: 14px;
+      margin-top: 16px;
       font-size: var(--text-sm);
-      color: var(--color-text-muted);
+      color: rgba(255,255,255,0.55);
       line-height: var(--leading-normal);
       max-width: 400px;
     }
 
-    /* ── CONTROLS ── */
-    .controls {
+    /* ── ACCENT BAR ── */
+    .accent-line {
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--sky);
+      margin-bottom: 20px;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main {
       max-width: 640px;
       margin: 0 auto;
-      padding: 26px 0 0;
+      padding: 0 24px;
+    }
+
+    /* ── CONTROLS ── */
+    .controls {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
+      padding: 32px 0 0;
     }
 
     .count {
       font-size: var(--text-xs);
-      color: var(--color-text-muted);
+      color: var(--mid-gray);
       letter-spacing: var(--tracking-wide);
     }
 
@@ -88,31 +122,34 @@
     .search-wrap svg {
       position: absolute; left: 10px; top: 50%;
       transform: translateY(-50%);
-      color: var(--color-text-muted);
+      color: var(--mid-gray);
       pointer-events: none;
     }
 
     input[type="search"] {
-      background: transparent;
-      border: 1px solid var(--color-border);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(91,126,196,0.25);
       border-radius: var(--r-sm);
       padding: 7px 12px 7px 32px;
       font-family: var(--font-body);
       font-size: var(--text-sm);
-      color: var(--color-text);
+      color: var(--off-white);
       outline: none;
       width: 180px;
-      transition: border-color var(--t-normal) var(--ease), width var(--t-normal) var(--ease);
+      transition: border-color var(--t-normal) var(--ease), width var(--t-normal) var(--ease), background var(--t-normal) var(--ease);
     }
 
-    input[type="search"]:focus { border-color: var(--sky); width: 220px; }
-    input[type="search"]::placeholder { color: var(--color-text-muted); }
+    input[type="search"]:focus {
+      border-color: var(--sky);
+      width: 220px;
+      background: rgba(91,126,196,0.08);
+    }
+
+    input[type="search"]::placeholder { color: var(--mid-gray); }
 
     /* ── GRID ── */
     .grid {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 16px 0 56px;
+      padding: 20px 0 56px;
     }
 
     /* ── CARD ── */
@@ -120,22 +157,30 @@
       display: grid;
       text-decoration: none;
       color: inherit;
-      padding: 26px 0;
-      border-bottom: 1px solid var(--color-border);
+      padding: 24px 20px;
+      border: 1px solid rgba(91,126,196,0.18);
+      border-radius: var(--r-md);
       grid-template-columns: 1fr auto;
-      gap: 6px 24px;
+      gap: 6px 20px;
       align-items: start;
-      transition: background var(--t-fast) var(--ease);
-      border-radius: var(--r-sm);
-      cursor: pointer;
+      background: rgba(27,47,91,0.4);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 12px;
       position: relative;
+      transition:
+        background var(--t-normal) var(--ease),
+        border-color var(--t-normal) var(--ease),
+        transform var(--t-fast) var(--ease),
+        box-shadow var(--t-normal) var(--ease);
     }
 
-    .card:first-child { border-top: 1px solid var(--color-border); }
+    .card:last-child { margin-bottom: 0; }
 
     .card:hover {
-      background: var(--light-blue);
-      padding-left: 16px; padding-right: 16px; margin: 0 -16px;
+      background: rgba(46,74,128,0.55);
+      border-color: var(--sky);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
     .card-title {
@@ -143,7 +188,7 @@
       font-size: 1.3rem;
       font-weight: var(--w-regular);
       line-height: var(--leading-snug);
-      color: var(--navy);
+      color: var(--white);
       transition: color var(--t-fast) var(--ease);
     }
 
@@ -152,7 +197,7 @@
     .card-desc {
       margin-top: 5px;
       font-size: var(--text-sm);
-      color: var(--color-text-muted);
+      color: rgba(255,255,255,0.45);
       line-height: var(--leading-normal);
       grid-column: 1;
     }
@@ -160,13 +205,14 @@
     .card-date {
       font-size: var(--text-xs);
       letter-spacing: var(--tracking-wider);
-      color: var(--color-text-muted);
+      color: var(--sky);
       white-space: nowrap;
       padding-top: 4px;
+      font-weight: var(--w-medium);
     }
 
     .card-arrow {
-      position: absolute; right: 0; top: 50%;
+      position: absolute; right: 20px; top: 50%;
       transform: translateY(-50%) translateX(-4px);
       opacity: 0; color: var(--sky);
       transition: opacity var(--t-fast) var(--ease), transform var(--t-normal) var(--ease);
@@ -178,15 +224,19 @@
     /* ── EMPTY ── */
     .empty {
       display: none; text-align: center;
-      padding: 56px 0; color: var(--color-text-muted); font-size: var(--text-sm);
+      padding: 56px 0; color: var(--mid-gray); font-size: var(--text-sm);
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid rgba(91,126,196,0.2);
+      margin: 0;
     }
 
     /* ── CALENDAR ── */
     .cal-section {
-      max-width: 640px;
-      margin: 0 auto;
       padding: 44px 0 80px;
-      border-top: 1px solid var(--color-border);
     }
 
     .cal-section-label {
@@ -204,25 +254,29 @@
     }
 
     .cal-nav button {
-      background: none;
-      border: 1px solid var(--color-border);
+      background: rgba(27,47,91,0.5);
+      border: 1px solid rgba(91,126,196,0.25);
       border-radius: var(--r-sm);
-      width: 32px; height: 32px;
+      width: 34px; height: 34px;
       cursor: pointer;
-      color: var(--color-text-muted);
+      color: var(--mid-gray);
       font-size: 18px;
       display: flex; align-items: center; justify-content: center;
-      transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+      transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
       line-height: 1;
     }
 
-    .cal-nav button:hover { border-color: var(--sky); color: var(--sky); }
+    .cal-nav button:hover {
+      border-color: var(--sky);
+      color: var(--sky);
+      background: rgba(91,126,196,0.1);
+    }
 
     .cal-month-label {
       font-family: var(--font-display);
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: var(--w-regular);
-      color: var(--navy);
+      color: var(--white);
     }
 
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
@@ -232,7 +286,7 @@
       font-size: 10px;
       letter-spacing: var(--tracking-widest);
       text-transform: uppercase;
-      color: var(--color-text-muted);
+      color: var(--mid-gray);
       padding-bottom: 12px;
       font-weight: var(--w-medium);
     }
@@ -241,14 +295,18 @@
       aspect-ratio: 1; display: flex;
       align-items: center; justify-content: center;
       font-size: var(--text-xs);
-      color: var(--color-text-muted);
+      color: rgba(255,255,255,0.25);
       border-radius: var(--r-full);
       position: relative;
       transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
       cursor: default;
     }
 
-    .cal-day.has-page { color: var(--navy); cursor: pointer; font-weight: var(--w-medium); }
+    .cal-day.has-page {
+      color: rgba(255,255,255,0.8);
+      cursor: pointer;
+      font-weight: var(--w-medium);
+    }
 
     .cal-day.has-page::after {
       content: ''; position: absolute; bottom: 3px; left: 50%;
@@ -256,15 +314,19 @@
       border-radius: var(--r-full); background: var(--sky);
     }
 
-    .cal-day.has-page:hover { background: var(--light-blue); color: var(--sky); }
-    .cal-day.today { background: var(--light-blue); color: var(--navy); }
-    .cal-day.selected { background: var(--navy); color: var(--white); }
-    .cal-day.selected::after { background: rgba(255,255,255,0.6); }
+    .cal-day.has-page:hover { background: rgba(91,126,196,0.2); color: var(--sky); }
+    .cal-day.today { background: rgba(91,126,196,0.15); color: var(--white); }
+    .cal-day.selected { background: var(--navy); color: var(--white); border: 1px solid var(--sky); }
+    .cal-day.selected::after { background: var(--sky); }
 
     /* ── CALENDAR POPUP ── */
     .cal-popup {
       display: none; margin-top: 24px;
-      padding: 20px 0 0; border-top: 1px solid var(--color-border);
+      padding: 20px;
+      background: rgba(27,47,91,0.5);
+      border: 1px solid rgba(91,126,196,0.25);
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow-md);
       animation: fadeInUp 0.2s var(--ease) both;
     }
 
@@ -282,31 +344,33 @@
     .cal-popup-link {
       display: flex; align-items: center;
       justify-content: space-between;
-      text-decoration: none; color: var(--navy);
-      padding: 14px 0; border-bottom: 1px solid var(--color-border);
+      text-decoration: none; color: var(--white);
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(91,126,196,0.15);
       transition: color var(--t-fast) var(--ease); gap: 16px;
     }
 
     .cal-popup-link:last-child { border-bottom: none; }
     .cal-popup-link:hover { color: var(--sky); }
 
-    .cal-popup-title {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-    }
-
+    .cal-popup-title { font-family: var(--font-display); font-size: 1.1rem; }
     .cal-popup-arrow { color: var(--sky); font-size: 16px; flex-shrink: 0; }
 
     /* ── FOOTER ── */
-    footer {
-      max-width: 640px; margin: 0 auto; padding: 0 0 48px;
-      font-size: var(--text-xs); color: var(--color-text-muted);
-      letter-spacing: var(--tracking-wider); text-align: center;
+    .page-footer {
+      border-top: 1px solid rgba(91,126,196,0.15);
+      padding: 28px 24px 48px;
+      text-align: center;
     }
 
-    /* ── FADE IN ── */
-    .card { animation: fadeInUp 0.4s var(--ease) both; }
+    .page-footer p {
+      font-size: var(--text-xs);
+      color: rgba(255,255,255,0.25);
+      letter-spacing: var(--tracking-wider);
+    }
 
+    /* ── ANIMATIONS ── */
+    .card { animation: fadeInUp 0.4s var(--ease) both; }
     .card:nth-child(1) { animation-delay: 0.05s; }
     .card:nth-child(2) { animation-delay: 0.10s; }
     .card:nth-child(3) { animation-delay: 0.15s; }
@@ -319,116 +383,129 @@
 </head>
 <body>
 
-<header>
-  <img src="https://storage.googleapis.com/tijeweb/lucky_charm/images/logo_clean.png" alt="AVHH · MTL" />
-  <p class="eyebrow">Una colección</p>
-  <h1>Cosas que hice<br><em>para ti</em></h1>
-  <p class="subtitle">Cada página es un momento. Entra cuando quieras.</p>
-</header>
-
-<div class="controls">
-  <span class="count" id="count"></span>
-  <div class="search-wrap">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="search" id="search" placeholder="Buscar…" autocomplete="off"/>
+<!-- ── HERO HEADER ── -->
+<div class="hero-header">
+  <div class="hero-inner">
+    <img src="https://storage.googleapis.com/tijeweb/lucky_charm/images/logo_clean.png" alt="AVHH · MTL" />
+    <span class="accent-line"></span>
+    <p class="eyebrow">Una colección</p>
+    <h1>Cosas que hice<br><em>para ti</em></h1>
+    <p class="subtitle">Cada página es un momento. Entra cuando quieras.</p>
   </div>
 </div>
 
-<div class="grid" id="grid">
+<!-- ── MAIN ── -->
+<div class="main">
 
-  <a class="card" data-date="2025-11-16" href="https://storage.googleapis.com/tijeweb/lucky_charm/museos/index.html" target="_blank">
-    <div>
-      <div class="card-title">Domingo con Ana Vic</div>
-      <div class="card-desc">La página para planear nuestro domingo en Chapultepec.</div>
+  <div class="controls">
+    <span class="count" id="count"></span>
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="search" placeholder="Buscar…" autocomplete="off"/>
     </div>
-    <div class="card-date">Nov 2025</div>
-    <span class="card-arrow">→</span>
-  </a>
-
-  <a class="card" data-date="2025-11-22" href="https://storage.googleapis.com/tijeweb/lucky_charm/probabilidades/index.html" target="_blank">
-    <div>
-      <div class="card-title">La probabilidad de nosotros</div>
-      <div class="card-desc">Cual es la probabilidad de que hayamos coincidido.</div>
-    </div>
-    <div class="card-date">Nov 2025</div>
-    <span class="card-arrow">→</span>
-  </a>
-
-  <a class="card" data-date="2025-12-02" href="https://fa.lcwebs.com" target="_blank">
-    <div>
-      <div class="card-title">First Aid</div>
-      <div class="card-desc">Aplicación de primeros auxilios para cuando necesitas una distracción.</div>
-    </div>
-    <div class="card-date">Dic 2025</div>
-    <span class="card-arrow">→</span>
-  </a>
-
-  <a class="card" data-date="2025-12-20" href="https://storage.googleapis.com/tijeweb/lucky_charm/girlfriend/pptx.html" target="_blank">
-    <div>
-      <div class="card-title">Propuesta #1</div>
-      <div class="card-desc">La página con la cual te pedí que fueras mi novia.</div>
-    </div>
-    <div class="card-date">Dic 2025</div>
-    <span class="card-arrow">→</span>
-  </a>
-
-  <a class="card" data-date="2025-12-20" href="https://storage.googleapis.com/tijeweb/lucky_charm/girlfriend/hacker.html" target="_blank">
-    <div>
-      <div class="card-title">Propuesta #2</div>
-      <div class="card-desc">La opción B con la cual te pediría que fueras mi novia.</div>
-    </div>
-    <div class="card-date">Dic 2025</div>
-    <span class="card-arrow">→</span>
-  </a>
-
-  <a class="card" data-date="2026-02-08" href="https://bet.lcwebs.com" target="_blank">
-    <div>
-      <div class="card-title">Lucky Bets</div>
-      <div class="card-desc">Página para hacer más divertido el super bowl y hacer apuestas.</div>
-    </div>
-    <div class="card-date">Feb 2026</div>
-    <span class="card-arrow">→</span>
-  </a>
-
-  <a class="card" data-date="2026-02-14" href="https://storage.googleapis.com/tijeweb/lucky_charm/SanValentin2026/index.html" target="_blank">
-    <div>
-      <div class="card-title">San Valentin</div>
-      <div class="card-desc">Página con una carta de San Valentin 2026.</div>
-    </div>
-    <div class="card-date">Feb 2026</div>
-    <span class="card-arrow">→</span>
-  </a>
-
-  <a class="card" data-date="2026-03-05" href="https://storage.googleapis.com/tijeweb/lucky_charm/Entrevista/goodluck.html" target="_blank">
-    <div>
-      <div class="card-title">Entrevista</div>
-      <div class="card-desc">Página de buena suerte en la entrevista.</div>
-    </div>
-    <div class="card-date">Mar 2026</div>
-    <span class="card-arrow">→</span>
-  </a>
-
-  <!-- FIN DE TARJETAS — añade más arriba de esta línea -->
-
-  <div class="empty" id="empty">No encontré nada con ese nombre.</div>
-</div>
-
-<!-- ── CALENDAR ── -->
-<div class="cal-section">
-  <p class="cal-section-label">Por fecha</p>
-  <div class="cal-nav">
-    <button id="cal-prev">&#8249;</button>
-    <span class="cal-month-label" id="cal-month-label"></span>
-    <button id="cal-next">&#8250;</button>
   </div>
-  <div class="cal-grid" id="cal-grid"></div>
-  <div class="cal-popup" id="cal-popup">
-    <div class="cal-popup-date" id="cal-popup-date"></div>
-    <div id="cal-popup-links"></div>
-  </div>
-</div>
 
-<footer>hecho con amor ♡</footer>
+  <div class="grid" id="grid">
+
+    <a class="card" data-date="2025-11-16" href="https://storage.googleapis.com/tijeweb/lucky_charm/museos/index.html" target="_blank">
+      <div>
+        <div class="card-title">Domingo con Ana Vic</div>
+        <div class="card-desc">La página para planear nuestro domingo en Chapultepec.</div>
+      </div>
+      <div class="card-date">Nov 2025</div>
+      <span class="card-arrow">→</span>
+    </a>
+
+    <a class="card" data-date="2025-11-22" href="https://storage.googleapis.com/tijeweb/lucky_charm/probabilidades/index.html" target="_blank">
+      <div>
+        <div class="card-title">La probabilidad de nosotros</div>
+        <div class="card-desc">Cual es la probabilidad de que hayamos coincidido.</div>
+      </div>
+      <div class="card-date">Nov 2025</div>
+      <span class="card-arrow">→</span>
+    </a>
+
+    <a class="card" data-date="2025-12-02" href="https://fa.lcwebs.com" target="_blank">
+      <div>
+        <div class="card-title">First Aid</div>
+        <div class="card-desc">Aplicación de primeros auxilios para cuando necesitas una distracción.</div>
+      </div>
+      <div class="card-date">Dic 2025</div>
+      <span class="card-arrow">→</span>
+    </a>
+
+    <a class="card" data-date="2025-12-20" href="https://storage.googleapis.com/tijeweb/lucky_charm/girlfriend/pptx.html" target="_blank">
+      <div>
+        <div class="card-title">Propuesta #1</div>
+        <div class="card-desc">La página con la cual te pedí que fueras mi novia.</div>
+      </div>
+      <div class="card-date">Dic 2025</div>
+      <span class="card-arrow">→</span>
+    </a>
+
+    <a class="card" data-date="2025-12-20" href="https://storage.googleapis.com/tijeweb/lucky_charm/girlfriend/hacker.html" target="_blank">
+      <div>
+        <div class="card-title">Propuesta #2</div>
+        <div class="card-desc">La opción B con la cual te pediría que fueras mi novia.</div>
+      </div>
+      <div class="card-date">Dic 2025</div>
+      <span class="card-arrow">→</span>
+    </a>
+
+    <a class="card" data-date="2026-02-08" href="https://bet.lcwebs.com" target="_blank">
+      <div>
+        <div class="card-title">Lucky Bets</div>
+        <div class="card-desc">Página para hacer más divertido el super bowl y hacer apuestas.</div>
+      </div>
+      <div class="card-date">Feb 2026</div>
+      <span class="card-arrow">→</span>
+    </a>
+
+    <a class="card" data-date="2026-02-14" href="https://storage.googleapis.com/tijeweb/lucky_charm/SanValentin2026/index.html" target="_blank">
+      <div>
+        <div class="card-title">San Valentin</div>
+        <div class="card-desc">Página con una carta de San Valentin 2026.</div>
+      </div>
+      <div class="card-date">Feb 2026</div>
+      <span class="card-arrow">→</span>
+    </a>
+
+    <a class="card" data-date="2026-03-05" href="https://storage.googleapis.com/tijeweb/lucky_charm/Entrevista/goodluck.html" target="_blank">
+      <div>
+        <div class="card-title">Entrevista</div>
+        <div class="card-desc">Página de buena suerte en la entrevista.</div>
+      </div>
+      <div class="card-date">Mar 2026</div>
+      <span class="card-arrow">→</span>
+    </a>
+
+    <!-- FIN DE TARJETAS — añade más arriba de esta línea -->
+
+    <div class="empty" id="empty">No encontré nada con ese nombre.</div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- ── CALENDAR ── -->
+  <div class="cal-section">
+    <p class="cal-section-label">Por fecha</p>
+    <div class="cal-nav">
+      <button id="cal-prev">&#8249;</button>
+      <span class="cal-month-label" id="cal-month-label"></span>
+      <button id="cal-next">&#8250;</button>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+    <div class="cal-popup" id="cal-popup">
+      <div class="cal-popup-date" id="cal-popup-date"></div>
+      <div id="cal-popup-links"></div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<div class="page-footer">
+  <p>hecho con amor ♡</p>
+</div>
 
 <script>
   const cards    = Array.from(document.querySelectorAll('.card'));
