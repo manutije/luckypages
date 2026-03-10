@@ -4,27 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lucky Pages</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet"/>
+
+  <!-- Brand Kit Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <!-- Brand Kit CSS -->
+  <link rel="stylesheet" href="https://storage.googleapis.com/tijeweb/lucky_charm/brandkit/brand-kit.css">
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #ffffff;
-      --ink: #1a1a18;
-      --muted: #9a9890;
-      --accent: #c9a96e;
-      --line: #e8e5df;
-      --card-hover: #f2efe9;
-    }
-
-    html { scroll-behavior: smooth; }
-
+    /* ── PAGE OVERRIDES ── */
     body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      min-height: 100vh;
       padding: 0 24px;
     }
 
@@ -32,129 +23,179 @@
     header {
       max-width: 640px;
       margin: 0 auto;
-      padding: 80px 0 56px;
-      border-bottom: 1px solid var(--line);
+      padding: 72px 0 52px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    header img {
+      height: 64px;
+      width: auto;
+      margin-bottom: 32px;
+      display: block;
     }
 
     .eyebrow {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.2em;
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: var(--w-semi);
+      letter-spacing: var(--tracking-widest);
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 20px;
+      color: var(--sky);
+      margin-bottom: 16px;
     }
 
-    h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(2.4rem, 6vw, 3.6rem);
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-      color: var(--ink);
+    header h1 {
+      font-family: var(--font-display);
+      font-weight: var(--w-light);
+      font-size: clamp(2.4rem, 6vw, 3.4rem);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      color: var(--navy);
     }
 
-    h1 em { font-style: italic; color: var(--accent); }
+    header h1 em {
+      font-style: italic;
+      color: var(--sky);
+    }
 
     .subtitle {
-      margin-top: 16px;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
+      margin-top: 14px;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: var(--leading-normal);
       max-width: 400px;
     }
 
-    /* ── FILTER BAR ── */
+    /* ── CONTROLS ── */
     .controls {
       max-width: 640px;
       margin: 0 auto;
-      padding: 28px 0 0;
+      padding: 26px 0 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
     }
 
-    .count { font-size: 12px; color: var(--muted); letter-spacing: 0.05em; }
+    .count {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+    }
 
     .search-wrap { position: relative; }
 
     .search-wrap svg {
       position: absolute; left: 10px; top: 50%;
       transform: translateY(-50%);
-      color: var(--muted); pointer-events: none;
+      color: var(--color-text-muted);
+      pointer-events: none;
     }
 
     input[type="search"] {
       background: transparent;
-      border: 1px solid var(--line);
-      border-radius: 6px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--r-sm);
       padding: 7px 12px 7px 32px;
-      font-family: inherit; font-size: 13px; color: var(--ink);
-      outline: none; width: 180px;
-      transition: border-color 0.2s, width 0.3s;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      outline: none;
+      width: 180px;
+      transition: border-color var(--t-normal) var(--ease), width var(--t-normal) var(--ease);
     }
 
-    input[type="search"]:focus { border-color: var(--accent); width: 220px; }
-    input[type="search"]::placeholder { color: var(--muted); }
+    input[type="search"]:focus { border-color: var(--sky); width: 220px; }
+    input[type="search"]::placeholder { color: var(--color-text-muted); }
 
     /* ── GRID ── */
-    .grid { max-width: 640px; margin: 0 auto; padding: 20px 0 60px; }
+    .grid {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 16px 0 56px;
+    }
 
     /* ── CARD ── */
     .card {
       display: grid;
       text-decoration: none;
       color: inherit;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--line);
+      padding: 26px 0;
+      border-bottom: 1px solid var(--color-border);
       grid-template-columns: 1fr auto;
-      gap: 8px 24px;
+      gap: 6px 24px;
       align-items: start;
-      transition: background 0.15s;
-      border-radius: 4px;
+      transition: background var(--t-fast) var(--ease);
+      border-radius: var(--r-sm);
       cursor: pointer;
       position: relative;
     }
 
-    .card:first-child { border-top: 1px solid var(--line); }
-    .card:hover { background: var(--card-hover); padding-left: 16px; padding-right: 16px; margin: 0 -16px; }
+    .card:first-child { border-top: 1px solid var(--color-border); }
 
-    .card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem; font-weight: 400; line-height: 1.2;
-      color: var(--ink); transition: color 0.15s;
+    .card:hover {
+      background: var(--light-blue);
+      padding-left: 16px; padding-right: 16px; margin: 0 -16px;
     }
 
-    .card:hover .card-title { color: var(--accent); }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: var(--w-regular);
+      line-height: var(--leading-snug);
+      color: var(--navy);
+      transition: color var(--t-fast) var(--ease);
+    }
 
-    .card-desc { margin-top: 6px; font-size: 13px; color: var(--muted); line-height: 1.5; grid-column: 1; }
+    .card:hover .card-title { color: var(--sky); }
 
-    .card-date { font-size: 11px; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; padding-top: 4px; }
+    .card-desc {
+      margin-top: 5px;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: var(--leading-normal);
+      grid-column: 1;
+    }
+
+    .card-date {
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wider);
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      padding-top: 4px;
+    }
 
     .card-arrow {
       position: absolute; right: 0; top: 50%;
       transform: translateY(-50%) translateX(-4px);
-      opacity: 0; color: var(--accent);
-      transition: opacity 0.15s, transform 0.2s; font-size: 18px;
+      opacity: 0; color: var(--sky);
+      transition: opacity var(--t-fast) var(--ease), transform var(--t-normal) var(--ease);
+      font-size: 18px;
     }
 
     .card:hover .card-arrow { opacity: 1; transform: translateY(-50%) translateX(0); }
 
-    /* ── EMPTY STATE ── */
-    .empty { display: none; text-align: center; padding: 60px 0; color: var(--muted); font-size: 14px; }
+    /* ── EMPTY ── */
+    .empty {
+      display: none; text-align: center;
+      padding: 56px 0; color: var(--color-text-muted); font-size: var(--text-sm);
+    }
 
     /* ── CALENDAR ── */
     .cal-section {
       max-width: 640px;
       margin: 0 auto;
-      padding: 48px 0 80px;
-      border-top: 1px solid var(--line);
+      padding: 44px 0 80px;
+      border-top: 1px solid var(--color-border);
     }
 
     .cal-section-label {
-      font-size: 11px; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 28px;
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--sky);
+      font-weight: var(--w-semi);
+      margin-bottom: 28px;
     }
 
     .cal-nav {
@@ -163,107 +204,123 @@
     }
 
     .cal-nav button {
-      background: none; border: 1px solid var(--line);
-      border-radius: 6px; width: 32px; height: 32px;
-      cursor: pointer; color: var(--muted); font-size: 18px;
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--r-sm);
+      width: 32px; height: 32px;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      font-size: 18px;
       display: flex; align-items: center; justify-content: center;
-      transition: border-color 0.15s, color 0.15s; line-height: 1;
+      transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+      line-height: 1;
     }
 
-    .cal-nav button:hover { border-color: var(--accent); color: var(--accent); }
+    .cal-nav button:hover { border-color: var(--sky); color: var(--sky); }
 
     .cal-month-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem; font-weight: 400; color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: var(--w-regular);
+      color: var(--navy);
     }
 
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
 
     .cal-dow {
-      text-align: center; font-size: 10px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--muted); padding-bottom: 12px;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding-bottom: 12px;
+      font-weight: var(--w-medium);
     }
 
     .cal-day {
       aspect-ratio: 1; display: flex;
       align-items: center; justify-content: center;
-      font-size: 12px; color: var(--muted);
-      border-radius: 50%; position: relative;
-      transition: background 0.15s, color 0.15s; cursor: default;
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      border-radius: var(--r-full);
+      position: relative;
+      transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+      cursor: default;
     }
 
-    .cal-day.has-page { color: var(--ink); cursor: pointer; font-weight: 400; }
+    .cal-day.has-page { color: var(--navy); cursor: pointer; font-weight: var(--w-medium); }
 
     .cal-day.has-page::after {
       content: ''; position: absolute; bottom: 3px; left: 50%;
       transform: translateX(-50%); width: 3px; height: 3px;
-      border-radius: 50%; background: var(--accent);
+      border-radius: var(--r-full); background: var(--sky);
     }
 
-    .cal-day.has-page:hover { background: var(--card-hover); color: var(--accent); }
-
-    .cal-day.today { background: var(--line); color: var(--ink); }
-
-    .cal-day.selected { background: var(--accent); color: #fff; }
-    .cal-day.selected::after { background: #fff; }
+    .cal-day.has-page:hover { background: var(--light-blue); color: var(--sky); }
+    .cal-day.today { background: var(--light-blue); color: var(--navy); }
+    .cal-day.selected { background: var(--navy); color: var(--white); }
+    .cal-day.selected::after { background: rgba(255,255,255,0.6); }
 
     /* ── CALENDAR POPUP ── */
     .cal-popup {
       display: none; margin-top: 24px;
-      padding: 20px 0 0; border-top: 1px solid var(--line);
-      animation: fadeUp 0.2s ease both;
+      padding: 20px 0 0; border-top: 1px solid var(--color-border);
+      animation: fadeInUp 0.2s var(--ease) both;
     }
 
     .cal-popup.visible { display: block; }
 
     .cal-popup-date {
-      font-size: 11px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--sky);
+      font-weight: var(--w-semi);
+      margin-bottom: 14px;
     }
 
     .cal-popup-link {
       display: flex; align-items: center;
-      justify-content: space-between; text-decoration: none;
-      color: var(--ink); padding: 14px 0;
-      border-bottom: 1px solid var(--line);
-      transition: color 0.15s; gap: 16px;
+      justify-content: space-between;
+      text-decoration: none; color: var(--navy);
+      padding: 14px 0; border-bottom: 1px solid var(--color-border);
+      transition: color var(--t-fast) var(--ease); gap: 16px;
     }
 
     .cal-popup-link:last-child { border-bottom: none; }
-    .cal-popup-link:hover { color: var(--accent); }
+    .cal-popup-link:hover { color: var(--sky); }
 
-    .cal-popup-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; }
-    .cal-popup-arrow { color: var(--accent); font-size: 16px; flex-shrink: 0; }
+    .cal-popup-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+    }
+
+    .cal-popup-arrow { color: var(--sky); font-size: 16px; flex-shrink: 0; }
 
     /* ── FOOTER ── */
     footer {
       max-width: 640px; margin: 0 auto; padding: 0 0 48px;
-      font-size: 11px; color: var(--muted); letter-spacing: 0.05em; text-align: center;
+      font-size: var(--text-xs); color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wider); text-align: center;
     }
 
     /* ── FADE IN ── */
-    .card { animation: fadeUp 0.4s ease both; }
+    .card { animation: fadeInUp 0.4s var(--ease) both; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .card:nth-child(1)  { animation-delay: 0.05s; }
-    .card:nth-child(2)  { animation-delay: 0.10s; }
-    .card:nth-child(3)  { animation-delay: 0.15s; }
-    .card:nth-child(4)  { animation-delay: 0.20s; }
-    .card:nth-child(5)  { animation-delay: 0.25s; }
-    .card:nth-child(6)  { animation-delay: 0.30s; }
-    .card:nth-child(7)  { animation-delay: 0.35s; }
-    .card:nth-child(8)  { animation-delay: 0.40s; }
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.10s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.20s; }
+    .card:nth-child(5) { animation-delay: 0.25s; }
+    .card:nth-child(6) { animation-delay: 0.30s; }
+    .card:nth-child(7) { animation-delay: 0.35s; }
+    .card:nth-child(8) { animation-delay: 0.40s; }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="https://storage.googleapis.com/tijeweb/lucky_charm/images/logo_clean.png" alt="AVHH · MTL" style="height: 220px; width: auto; margin-bottom: 28px; display: block; opacity: 0.9;" />
+  <img src="https://storage.googleapis.com/tijeweb/lucky_charm/images/logo_clean.png" alt="AVHH · MTL" />
   <p class="eyebrow">Una colección</p>
   <h1>Cosas que hice<br><em>para ti</em></h1>
   <p class="subtitle">Cada página es un momento. Entra cuando quieras.</p>
@@ -279,7 +336,7 @@
 
 <div class="grid" id="grid">
 
-  <a class="card" data-date="2025-11-16" href="https://storage.googleapis.com/tijeweb/lucky_charm/museos/index.html" target="_blank">
+  <a class="card" data-date="2025-11-01" href="https://storage.googleapis.com/tijeweb/lucky_charm/museos/index.html" target="_blank">
     <div>
       <div class="card-title">Domingo con Ana Vic</div>
       <div class="card-desc">La página para planear nuestro domingo en Chapultepec.</div>
@@ -288,7 +345,7 @@
     <span class="card-arrow">→</span>
   </a>
 
-  <a class="card" data-date="2025-11-22" href="https://storage.googleapis.com/tijeweb/lucky_charm/probabilidades/index.html" target="_blank">
+  <a class="card" data-date="2025-11-15" href="https://storage.googleapis.com/tijeweb/lucky_charm/probabilidades/index.html" target="_blank">
     <div>
       <div class="card-title">La probabilidad de nosotros</div>
       <div class="card-desc">Cual es la probabilidad de que hayamos coincidido.</div>
@@ -297,7 +354,7 @@
     <span class="card-arrow">→</span>
   </a>
 
-  <a class="card" data-date="2025-12-02" href="https://fa.lcwebs.com" target="_blank">
+  <a class="card" data-date="2025-12-01" href="https://fa.lcwebs.com" target="_blank">
     <div>
       <div class="card-title">First Aid</div>
       <div class="card-desc">Aplicación de primeros auxilios para cuando necesitas una distracción.</div>
@@ -306,7 +363,7 @@
     <span class="card-arrow">→</span>
   </a>
 
-  <a class="card" data-date="2025-12-20" href="https://storage.googleapis.com/tijeweb/lucky_charm/girlfriend/pptx.html" target="_blank">
+  <a class="card" data-date="2025-12-10" href="https://storage.googleapis.com/tijeweb/lucky_charm/girlfriend/pptx.html" target="_blank">
     <div>
       <div class="card-title">Propuesta #1</div>
       <div class="card-desc">La página con la cual te pedí que fueras mi novia.</div>
@@ -315,7 +372,7 @@
     <span class="card-arrow">→</span>
   </a>
 
-  <a class="card" data-date="2025-12-20" href="https://storage.googleapis.com/tijeweb/lucky_charm/girlfriend/hacker.html" target="_blank">
+  <a class="card" data-date="2025-12-10" href="https://storage.googleapis.com/tijeweb/lucky_charm/girlfriend/hacker.html" target="_blank">
     <div>
       <div class="card-title">Propuesta #2</div>
       <div class="card-desc">La opción B con la cual te pediría que fueras mi novia.</div>
@@ -324,12 +381,12 @@
     <span class="card-arrow">→</span>
   </a>
 
-  <a class="card" data-date="2026-02-08" href="https://bet.lcwebs.com" target="_blank">
+  <a class="card" data-date="2026-01-01" href="https://bet.lcwebs.com" target="_blank">
     <div>
       <div class="card-title">Lucky Bets</div>
       <div class="card-desc">Página para hacer más divertido el super bowl y hacer apuestas.</div>
     </div>
-    <div class="card-date">Feb 2026</div>
+    <div class="card-date">Ene 2026</div>
     <span class="card-arrow">→</span>
   </a>
 
@@ -342,7 +399,7 @@
     <span class="card-arrow">→</span>
   </a>
 
-  <a class="card" data-date="2026-03-05" href="https://storage.googleapis.com/tijeweb/lucky_charm/Entrevista/goodluck.html" target="_blank">
+  <a class="card" data-date="2026-03-01" href="https://storage.googleapis.com/tijeweb/lucky_charm/Entrevista/goodluck.html" target="_blank">
     <div>
       <div class="card-title">Entrevista</div>
       <div class="card-desc">Página de buena suerte en la entrevista.</div>
@@ -420,7 +477,6 @@
   let calMonth = today.getMonth();
   let selectedEl = null;
 
-  // Start on the most recent page's month
   const allDates = Object.keys(pagesByDate).sort();
   if (allDates.length) {
     const last = allDates[allDates.length - 1].split('-');
